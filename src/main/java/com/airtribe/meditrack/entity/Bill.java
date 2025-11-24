@@ -17,7 +17,8 @@ public class Bill {
         this.paymentStatus = paymentStatus;
     }
 
-    public Bill() {}
+    public Bill() {
+    }
 
     public Long getBillId() {
         return billId;

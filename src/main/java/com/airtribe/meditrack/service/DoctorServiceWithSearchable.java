@@ -12,29 +12,29 @@ public class DoctorServiceWithSearchable implements Searchable<Doctor> {
         this.doctors = new HashMap<>();
     }
 
-//    Create
+    //    Create
     public void addDoctor(Doctor doctor) {
         if (doctor == null) {
             throw new IllegalArgumentException("Doctor cannot be null");
         }
-        if(doctors.containsKey(doctor.getDoctorId())){
+        if (doctors.containsKey(doctor.getDoctorId())) {
             throw new IllegalArgumentException("Doctor with ID " + doctor.getDoctorId() + " already exists");
         }
         doctors.put(doctor.getDoctorId(), doctor);
     }
 
-//    Read
-    public Optional<Doctor> getDoctorByID(String doctorId){
+    //    Read
+    public Optional<Doctor> getDoctorByID(String doctorId) {
         return Optional.ofNullable(doctors.get(doctorId));
     }
 
-    public Collection<Doctor> getAllDoctors(){
+    public Collection<Doctor> getAllDoctors() {
         return Collections.unmodifiableCollection(doctors.values());
     }
 
-//    Update
-    public boolean updateDoctorName(String doctorId, String newName){
-        if(!doctors.containsKey(doctorId)){
+    //    Update
+    public boolean updateDoctorName(String doctorId, String newName) {
+        if (!doctors.containsKey(doctorId)) {
             return false;
         }
         Doctor doctor = doctors.get(doctorId);
@@ -42,17 +42,17 @@ public class DoctorServiceWithSearchable implements Searchable<Doctor> {
         return true;
     }
 
-//    Delete
+    //    Delete
     public boolean deleteDoctor(String doctorId) {
         return doctors.remove(doctorId) != null;
     }
 
-//    Search
+    //    Search
     @Override
     public List<Doctor> searchByKeyword(String keyword) {
         return doctors.values().stream()
                 .filter(d -> d.getName().toLowerCase().contains(keyword.toLowerCase())
-                || d.getSpecialization().toString().toLowerCase().contains(keyword.toLowerCase()))
+                        || d.getSpecialization().toString().toLowerCase().contains(keyword.toLowerCase()))
                 .toList();
     }
 }

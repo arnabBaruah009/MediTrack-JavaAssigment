@@ -5,7 +5,7 @@ import com.airtribe.meditrack.constants.Specialization;
 
 import java.time.LocalDate;
 
-public class Doctor extends Person{
+public class Doctor extends Person {
     private String doctorId;
     private Specialization specialization;
 

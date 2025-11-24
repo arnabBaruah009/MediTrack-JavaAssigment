@@ -9,14 +9,14 @@ import java.util.Optional;
 public class DoctorService {
     private List<Doctor> doctors;
 
-    public DoctorService(){
+    public DoctorService() {
         this.doctors = new ArrayList<>();
     }
 
 //    Create
 
     public void addDoctor(Doctor doctor) {
-        if(doctor == null){
+        if (doctor == null) {
             throw new IllegalArgumentException("Doctor cannot be null");
         }
         doctors.add(doctor);
@@ -35,7 +35,7 @@ public class DoctorService {
                 .findFirst();
     }
 
-    public Optional<Doctor> getDoctorById(String doctorId){
+    public Optional<Doctor> getDoctorById(String doctorId) {
         return doctors.stream()
                 .filter(doctor -> doctor.getDoctorId().equals(doctorId))
                 .findFirst();
@@ -43,9 +43,9 @@ public class DoctorService {
 
 //    Update
 
-    public boolean updateDoctorName(String doctorId, String newName){
+    public boolean updateDoctorName(String doctorId, String newName) {
         Optional<Doctor> doctor = getDoctorById(doctorId);
-        if(doctor.isPresent()){
+        if (doctor.isPresent()) {
             doctor.get().setName(newName);
             System.out.println("Doctor name updated to: " + newName);
             return true;
