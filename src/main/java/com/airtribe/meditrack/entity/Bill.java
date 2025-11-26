@@ -2,14 +2,16 @@ package com.airtribe.meditrack.entity;
 
 import com.airtribe.meditrack.constants.PaymentStatus;
 
+import java.time.LocalDateTime;
+
 public class Bill {
     private Long billId;
     private Long patientId;
     private Double amount;
-    private String billingDate;
+    private LocalDateTime billingDate;
     private PaymentStatus paymentStatus;
 
-    public Bill(Long billId, Long patientId, Double amount, String billingDate, PaymentStatus paymentStatus) {
+    public Bill(Long billId, Long patientId, Double amount, LocalDateTime billingDate, PaymentStatus paymentStatus) {
         this.billId = billId;
         this.patientId = patientId;
         this.amount = amount;
@@ -44,11 +46,11 @@ public class Bill {
         this.amount = amount;
     }
 
-    public String getBillingDate() {
+    public LocalDateTime getBillingDate() {
         return billingDate;
     }
 
-    public void setBillingDate(String billingDate) {
+    public void setBillingDate(LocalDateTime billingDate) {
         this.billingDate = billingDate;
     }
 
