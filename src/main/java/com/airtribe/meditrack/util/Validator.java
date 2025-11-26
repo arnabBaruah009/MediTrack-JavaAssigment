@@ -6,8 +6,31 @@ import com.airtribe.meditrack.exceptions.InvalidBillingException;
 
 import java.time.LocalDateTime;
 
-public class BillValidator {
-    public static void validate(Bill bill) {
+public class Validator {
+    private static boolean isValidSlot(LocalDateTime dateTime) {
+        int minute = dateTime.getMinute();
+        return minute == 0 || minute == 30;
+    }
+
+    public static void validateAppointment(Long patientId, Long doctorId, LocalDateTime dateTime) {
+
+        if (patientId == null || patientId <= 0)
+            throw new IllegalArgumentException("Patient ID is invalid");
+
+        if (doctorId == null || doctorId <= 0)
+            throw new IllegalArgumentException("Doctor ID is invalid");
+
+        if (dateTime == null)
+            throw new IllegalArgumentException("Appointment date cannot be null");
+
+        if (dateTime.isBefore(LocalDateTime.now()))
+            throw new IllegalArgumentException("Appointment date cannot be in the past");
+
+        if (!isValidSlot(dateTime))
+            throw new IllegalArgumentException("Appointments must be on the hour or half-hour");
+    }
+
+    public static void validateBill(Bill bill) {
 
         if (bill == null) {
             throw new InvalidBillingException("Bill object cannot be null.");

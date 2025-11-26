@@ -4,7 +4,7 @@ import com.airtribe.meditrack.constants.PaymentStatus;
 import com.airtribe.meditrack.entity.Bill;
 import com.airtribe.meditrack.entity.BillingSummary;
 import com.airtribe.meditrack.interfaces.BillingStrategy;
-import com.airtribe.meditrack.util.BillValidator;
+import com.airtribe.meditrack.util.Validator;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ public class BillingService {
     private final List<Bill> bills = new ArrayList<>();
 
     public void addBill(Bill bill) {
-        BillValidator.validate(bill);
+        Validator.validateBill(bill);
         bills.add(bill);
     }
 
