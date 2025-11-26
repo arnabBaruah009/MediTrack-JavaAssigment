@@ -1,13 +1,12 @@
 package com.airtribe.meditrack.service;
 
-import com.airtribe.meditrack.entity.Appointment;
 import com.airtribe.meditrack.constants.AppointmentStatus;
-import com.airtribe.meditrack.util.AppointmentValidator;
+import com.airtribe.meditrack.entity.Appointment;
+import com.airtribe.meditrack.util.Validator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AppointmentService {
 
@@ -17,7 +16,7 @@ public class AppointmentService {
     // CREATE
     // ----------------------------
     public Appointment createAppointment(Long patientId, Long doctorId, LocalDateTime dateTime) {
-        AppointmentValidator.validateData(patientId, doctorId, dateTime);
+        Validator.validateAppointment(patientId, doctorId, dateTime);
         ensureSlotFree(doctorId, dateTime, null);
 
         Appointment appointment =
@@ -34,7 +33,7 @@ public class AppointmentService {
         if (appointment == null)
             throw new IllegalArgumentException("Appointment cannot be null");
 
-        AppointmentValidator.validateData(
+        Validator.validateAppointment(
                 appointment.getPatientId(),
                 appointment.getDoctorId(),
                 newTime
@@ -74,19 +73,19 @@ public class AppointmentService {
     public List<Appointment> getAppointmentsByStatus(AppointmentStatus status) {
         return appointments.stream()
                 .filter(a -> a.getStatus() == status)
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 
     public List<Appointment> getAppointmentByDoctor(Long doctorId) {
         return appointments.stream()
                 .filter(a -> a.getDoctorId().equals(doctorId))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 
     public List<Appointment> getAppointmentByPatient(Long patientId) {
         return appointments.stream()
                 .filter(a -> a.getPatientId().equals(patientId))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
     }
 
     // ----------------------------
@@ -113,7 +112,6 @@ public class AppointmentService {
 
         return appointments.remove(appointment);
     }
-
 
 
 }
