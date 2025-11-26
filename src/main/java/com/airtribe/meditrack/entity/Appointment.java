@@ -50,4 +50,9 @@ public class Appointment {
         this.status = status;
     }
 
+    public boolean isActive() {
+        return status != AppointmentStatus.CANCELLED &&
+                status != AppointmentStatus.COMPLETED;
+    }
+
 }
