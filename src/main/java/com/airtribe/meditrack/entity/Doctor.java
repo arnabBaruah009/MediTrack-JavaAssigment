@@ -17,7 +17,7 @@ public class Doctor extends Person {
 
     // Constructor chaining
     public Doctor(String name, String email) {
-        this(name, email, 565757L, "Ghy", LocalDate.now(), Gender.MALE, "Doc-001", Specialization.ONCOLOGIST);
+        this(name, email, 565757L, "Ghy", LocalDate.now(), Gender.MALE, "Doc-001", Specialization.GENERAL_PHYSICIAN);
     }
 
     @Override

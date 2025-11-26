@@ -38,4 +38,9 @@ public class BillingService {
                 .findFirst();
         bill.ifPresent(value -> value.setPaymentStatus(PaymentStatus.PAID));
     }
+
+    //    View
+    public void viewBill(Bill bill) {
+        System.out.println("Bill ID: " + bill.getBillId() + " Amount: " + bill.getAmount() + " Payment Status: " + bill.getPaymentStatus());
+    }
 }

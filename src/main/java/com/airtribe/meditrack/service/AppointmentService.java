@@ -113,5 +113,12 @@ public class AppointmentService {
         return appointments.remove(appointment);
     }
 
-
+    // ----------------------------
+    // VIEW
+    // ----------------------------
+    public void viewAppointment(Appointment appointment) {
+        if (appointment == null)
+            throw new IllegalArgumentException("Appointment cannot be null");
+        System.out.println("Appointment Data: " + appointment.getDoctorId() + " " + appointment.getPatientId() + " " + appointment.getAppointmentDate() + " " + appointment.getStatus());
+    }
 }

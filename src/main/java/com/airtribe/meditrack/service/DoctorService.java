@@ -47,6 +47,11 @@ public class DoctorService implements Searchable<Doctor> {
         return doctors.remove(doctorId) != null;
     }
 
+    //    View
+    public void viewDoctor(Doctor doctor) {
+        System.out.println("Doctor ID: " + doctor.getDoctorId() + " Name: " + doctor.getName() + " Specialization: " + doctor.getSpecialization());
+    }
+
     //    Search
     @Override
     public List<Doctor> searchByKeyword(String keyword) {

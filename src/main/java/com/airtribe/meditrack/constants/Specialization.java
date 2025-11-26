@@ -9,7 +9,4 @@ public enum Specialization {
     ORTHOPEDIC,
     GYNECOLOGIST,
     ENT_SPECIALIST,
-    PSYCHIATRIST,
-    RADIOLOGIST,
-    ONCOLOGIST
 }

@@ -86,11 +86,75 @@ Run:
 
 ## Usage Overview (What you can try)
 
-- Create patients and doctors, then search for them by keyword.
-- Schedule appointments, update their status, and inspect the schedule.
-- Generate bills for completed visits; experiment with different billing calculation strategies.
-- Print summaries for auditing or reconciliation.
-- Extend the domain with new types, validation rules, or interfaces.
+When you run the `Main` class, you’ll interact with a **menu-driven console UI** that lets you manage every part of the
+MediTrack system.
+
+### 🏥 Main Menu
+
+- Manage Appointments
+- Manage Doctors
+- Manage Patients
+- Manage Billing
+- Exit
+
+---
+
+### 👨‍⚕️ Doctor Management
+
+Perform full CRUD operations and name/specialization-based search.
+
+You can:
+
+- Add doctors with full Person details (name, email, phone, address, DOB, gender).
+- Select specialization from an enum-driven list.
+- View or search doctors by ID, name, or specialization.
+- Update doctor name.
+- Delete doctor records.
+
+---
+
+### 🧍 Patient Management
+
+Manage all patient-related actions.
+
+You can:
+
+- Add patients with Person details.
+- View all or search by ID.
+- Update patient name.
+- Delete patient records.
+- Search patients by name keyword.
+
+---
+
+### 📅 Appointment Management
+
+Schedule and manage appointments with built-in conflict detection (prevents double-booking within 30 minutes).
+
+You can:
+
+- Create an appointment.
+- Update appointment date/time.
+- List all appointments.
+- Filter by doctor or patient.
+- Update appointment status (PENDING / COMPLETED / CANCELLED).
+- Delete appointments.
+
+---
+
+### 💵 Billing Management
+
+Generate bills with different tax strategies using the Strategy Pattern.
+
+You can:
+
+- Add bills for patients.
+- Choose between:
+    - GST Billing Strategy (18%)
+    - Senior Citizen Billing Strategy (5%)
+- Generate bill summaries.
+- Mark payments as PAID.
+- View all bills.
 
 ## Project Structure (at a glance)
 

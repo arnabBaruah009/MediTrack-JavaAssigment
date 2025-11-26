@@ -47,6 +47,11 @@ public class PatientService implements Searchable<Patient> {
         return patients.remove(patientId) != null;
     }
 
+    //    View
+    public void viewPatient(Patient patient) {
+        System.out.println("Patient ID: " + patient.getPatientId() + " Name: " + patient.getName() + " Address: " + patient.getAddress());
+    }
+
 
     @Override
     public List<Patient> searchByKeyword(String keyword) {
