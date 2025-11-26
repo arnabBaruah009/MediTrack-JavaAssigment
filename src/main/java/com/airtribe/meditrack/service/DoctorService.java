@@ -1,62 +1,58 @@
 package com.airtribe.meditrack.service;
 
 import com.airtribe.meditrack.entity.Doctor;
+import com.airtribe.meditrack.interfaces.Searchable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public class DoctorService {
-    private List<Doctor> doctors;
+public class DoctorService implements Searchable<Doctor> {
+    private Map<String, Doctor> doctors;
 
     public DoctorService() {
-        this.doctors = new ArrayList<>();
+        this.doctors = new HashMap<>();
     }
 
-//    Create
-
+    //    Create
     public void addDoctor(Doctor doctor) {
         if (doctor == null) {
             throw new IllegalArgumentException("Doctor cannot be null");
         }
-        doctors.add(doctor);
-        System.out.println("Doctor added: " + doctor.getName());
-    }
-
-//    Read
-
-    public List<Doctor> getAllDoctors() {
-        return new ArrayList<>(doctors);
-    }
-
-    public Optional<Doctor> getDoctorByName(String name) {
-        return doctors.stream()
-                .filter(doctor -> doctor.getName().equalsIgnoreCase(name))
-                .findFirst();
-    }
-
-    public Optional<Doctor> getDoctorById(String doctorId) {
-        return doctors.stream()
-                .filter(doctor -> doctor.getDoctorId().equals(doctorId))
-                .findFirst();
-    }
-
-//    Update
-
-    public boolean updateDoctorName(String doctorId, String newName) {
-        Optional<Doctor> doctor = getDoctorById(doctorId);
-        if (doctor.isPresent()) {
-            doctor.get().setName(newName);
-            System.out.println("Doctor name updated to: " + newName);
-            return true;
+        if (doctors.containsKey(doctor.getDoctorId())) {
+            throw new IllegalArgumentException("Doctor with ID " + doctor.getDoctorId() + " already exists");
         }
-        System.out.println("Doctor not found with ID: " + doctorId);
-        return false;
+        doctors.put(doctor.getDoctorId(), doctor);
     }
 
-//    Delete
+    //    Read
+    public Optional<Doctor> getDoctorByID(String doctorId) {
+        return Optional.ofNullable(doctors.get(doctorId));
+    }
 
+    public Collection<Doctor> getAllDoctors() {
+        return Collections.unmodifiableCollection(doctors.values());
+    }
+
+    //    Update
+    public boolean updateDoctorName(String doctorId, String newName) {
+        if (!doctors.containsKey(doctorId)) {
+            return false;
+        }
+        Doctor doctor = doctors.get(doctorId);
+        doctor.setName(newName);
+        return true;
+    }
+
+    //    Delete
     public boolean deleteDoctor(String doctorId) {
-        return doctors.removeIf(doctor -> doctor.getDoctorId().equals(doctorId));
+        return doctors.remove(doctorId) != null;
+    }
+
+    //    Search
+    @Override
+    public List<Doctor> searchByKeyword(String keyword) {
+        return doctors.values().stream()
+                .filter(d -> d.getName().toLowerCase().contains(keyword.toLowerCase())
+                        || d.getSpecialization().toString().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
     }
 }
